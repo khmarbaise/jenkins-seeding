@@ -4,7 +4,7 @@ job {
         git('git@github.com:khmarbaise/artifactor-maven-plugin.git')
     }
     triggers {
-        scm('*/15 * * * *')
+        scm('H/15 * * * *')
     }
     steps {
         maven('-B -Prun-its clean verify')
