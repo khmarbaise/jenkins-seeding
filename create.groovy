@@ -10,10 +10,10 @@ job {
     }
 
     steps {
-/*        maven {
-            name = "Maven 3.1.1"
+        maven {
+            version = "Maven 3.1.1"
         }
-*
+
         mavenInstallation("Maven 3.1.1")
         maven('-B -Prun-its clean verify')
     }
