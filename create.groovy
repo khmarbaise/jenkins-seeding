@@ -8,9 +8,9 @@ job {
 //    jdk("JDK-1.6-u45")
     jdk("JDK-1.7-u40")
 
-    mavenInstallation("Maven 3.1.1")
+//    mavenInstallation("Maven 3.1.1")
     localRepository(LocalToWorkspace)
-    goals("-B -Prun-its clean test")
+//    goals("-B -Prun-its clean test")
 
     scm {
         git('git@github.com:khmarbaise/artifactor-maven-plugin.git')
@@ -22,8 +22,8 @@ job {
 
     steps {
         maven {
-            version = "Maven 3.1.1"
+            installation = "Maven 3.1.1"
+            goals("-B -Prun-its clean verify")
         }
-        goals("-B -Prun-its clean verify")
     }
 }
