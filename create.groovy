@@ -24,7 +24,7 @@ job {
     }
 
     steps {
-        mavenVersions.each {
+        mavenVersions.each { it ->
           maven {
               mavenInstallation(it)
               goals("-B -Prun-its clean verify")
