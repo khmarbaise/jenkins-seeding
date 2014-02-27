@@ -9,7 +9,7 @@ job {
     jdk("JDK-1.7-u40")
 
 //    mavenInstallation("Maven 3.1.1")
-    localRepository(LocalToWorkspace)
+//    localRepository(LocalToWorkspace)
 //    goals("-B -Prun-its clean test")
 
     scm {
