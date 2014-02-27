@@ -22,6 +22,10 @@ job {
 
     steps {
         maven {
+            mavenVersion = 'Maven 3.0.5'
+            goals("-B -Prun-its clean verify")
+        }
+        maven {
             mavenVersion = 'Maven 3.1.1'
             goals("-B -Prun-its clean verify")
         }
