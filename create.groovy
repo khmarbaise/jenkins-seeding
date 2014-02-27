@@ -1,4 +1,7 @@
 // job (type: Maven) {
+
+def mavenVersions = [ 'Maven 2.0.11', 'Maven 2.2.1', 'Maven 3.0.5', 'Maven 3.1.0', 'Maven 3.1.1' ]
+
 job {
 
     name 'DSL-Tutorial-1-Test-Artifactor-maven-plugin'
@@ -21,16 +24,13 @@ job {
     }
 
     steps {
-        maven {
-            mavenInstallation('Maven 3.0.5')
-            goals("-B -Prun-its clean verify")
-            localRepository(LocalToWorkspace)
+        mavenVersions.each {
+          maven {
+              mavenInstallation(it)
+              goals("-B -Prun-its clean verify")
+              localRepository(LocalToWorkspace)
 
-        }
-        maven {
-            mavenInstallation('Maven 3.1.1')
-            goals("-B -Prun-its clean verify")
-            localRepository(LocalToWorkspace)
+          }
         }
     }
 }
