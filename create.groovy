@@ -1,6 +1,6 @@
 // job (type: Maven) {
 
-def mavenVersions = [ 'Maven 2.0.11', 'Maven 2.2.1', 'Maven 3.0.5', 'Maven 3.1.0', 'Maven 3.1.1' ]
+def mavenVersions = [ "Maven 2.0.11", "Maven 2.2.1", "Maven 3.0.5", "Maven 3.1.0", "Maven 3.1.1" ]
 
 job {
 
