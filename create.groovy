@@ -22,12 +22,15 @@ job {
 
     steps {
         maven {
-            mavenVersion = 'Maven 3.0.5'
+            version = 'Maven 3.0.5'
             goals("-B -Prun-its clean verify")
+            localRepository(LocalToWorkspace)
+
         }
         maven {
-            mavenVersion = 'Maven 3.1.1'
+            version = 'Maven 3.1.1'
             goals("-B -Prun-its clean verify")
+            localRepository(LocalToWorkspace)
         }
     }
 }
