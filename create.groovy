@@ -1,4 +1,5 @@
-job (type: Maven) {
+// job (type: Maven) {
+job {
 
     name 'DSL-Tutorial-1-Test-Artifactor-maven-plugin'
 
@@ -20,11 +21,9 @@ job (type: Maven) {
     }
 
     steps {
-/*
         maven {
             version = "Maven 3.1.1"
         }
-*/
-        maven('-B -Prun-its clean verify')
+        goals("-B -Prun-its clean verify")
     }
 }
