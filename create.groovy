@@ -25,8 +25,9 @@ job {
 
     steps {
         mavenVersions.each {
+          println " Maven: '" + it + "'"
           maven {
-              mavenInstallation(it.name)
+              mavenInstallation(it)
               goals("-B -Prun-its clean verify")
               localRepository(LocalToWorkspace)
 
