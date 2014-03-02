@@ -46,7 +46,7 @@ job {
         existingMavenInstallations.each {
           println " Maven: '" + it + "'"
           maven {
-              mavenInstallation("" + it)
+              mavenName(it)
               goals("-B -Prun-its clean verify")
               localRepository(LocalToWorkspace)
 
