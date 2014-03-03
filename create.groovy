@@ -48,7 +48,8 @@ job {
           maven {
               //The following could not be working at the moment based:
               //https://github.com/JavaPosseRoundup/job-dsl-plugin/blob/master/src/main/groovy/javaposse/jobdsl/dsl/helpers/StepHelper.groovy#L145
-              mavenName(it)
+              //mavenName(it)
+              mavenInstallation(it)
               goals("-B -Prun-its clean verify")
               localRepository(LocalToWorkspace)
 
