@@ -215,7 +215,7 @@ job {
 job {
     name 'DSL-maven-job'
     jdk("JDK-1.7-u40")
-    disabled(true)
+    disabled(false)
     scm {
         git('git@github.com:khmarbaise/artifactor-maven-plugin.git')
     }
@@ -242,7 +242,7 @@ existingMojoCodehausPlugins.each {
     println " Plugin: " + plugin
     job {
       name ('DSL-' + plugin)
-      disabled(true)
+      disabled(false)
 
       jdk("JDK-1.7-u40")
       scm {
@@ -271,7 +271,7 @@ existingApacheMavenPlugins.each {
     println " Plugin: " + plugin
     job {
       name ('DSL-' + plugin)
-      disabled(true)
+      disabled(false)
 
       jdk("JDK-1.7-u40")
       scm {
