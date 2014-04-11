@@ -161,7 +161,7 @@ def svn_mojo_plugin = 'https://svn.codehaus.org/mojo/trunk/mojo'
 job (type:Maven) {
     name 'DSL-maven-mojo-codehaus-ci-aggregrator'
     jdk("JDK-1.7-u40")
-    disabled(true)
+    disabled(false)
     scm {
         svn ('http://svn.codehaus.org/mojo/trunk/mojo', '.')
     }
@@ -182,7 +182,7 @@ job (type:Maven) {
 job {
 
     name 'DSL-Tutorial-1-Test-Artifactor-maven-plugin'
-    disabled(true)
+    disabled(false)
 
     jdk("JDK-1.7-u40")
 
