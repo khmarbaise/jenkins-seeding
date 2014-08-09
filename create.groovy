@@ -132,7 +132,8 @@ existingApacheMavenPlugins.each {
 
 existingMavenInstallations.each {
   mavenInst ->
-    def regexMaven = mavenInst.replaceAll('\\.', '\\\\.').replaceAll('-', '\\-').replaceAll(' ', '\\ ')
+    def mavenJobName = mavenInst.replaceAll(' ', '-')
+    def regexMaven = mavenJobName.replaceAll('\\.', '\\\\.').replaceAll('-', '\\-').replaceAll(' ', '\\ ')
     view {
       name (mavenInst)
       columns {
