@@ -61,7 +61,7 @@ def defaultJDK = existingJDKInstallations[0]
 existingApacheMavenPlugins.each {
   plugin ->
     println " Plugin: " + plugin
-    job {
+    job (type: Maven) {
       name ('DSL-' + plugin)
       disabled(true)
 
@@ -72,6 +72,7 @@ existingApacheMavenPlugins.each {
       triggers {
           scm('H/15 * * * *')
       }
+
       steps {
         existingMavenInstallations.each {
           installation ->
@@ -87,3 +88,9 @@ existingApacheMavenPlugins.each {
     }
 }
 
+view {
+  name ("First View")
+  jobs {
+    regex ('^DSL-.*')
+  }
+}
