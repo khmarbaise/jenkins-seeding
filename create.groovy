@@ -61,7 +61,7 @@ def defaultJDK = existingJDKInstallations[0]
 existingApacheMavenPlugins.each {
   plugin ->
     println " Plugin: " + plugin
-    job (type: Maven) {
+    job {
       name ('DSL-' + plugin)
       disabled(true)
 
