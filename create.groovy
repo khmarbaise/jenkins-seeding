@@ -6,7 +6,6 @@ import java.util.*
 
 
 def existingMavenInstallations = [ "Maven 2.2.1", "Maven 3.0.5", "Maven 3.1.1", "Maven 3.2.1", "Maven 3.2.2" ]
-//def existingJDKInstallations = [ "JDK-1.5-u22", "JDK-1.6-u45", "JDK-1.7-u40", "JDK-1.8-u5" ]
 def existingJDKInstallations = [ "JDK 1.5-22", "JDK 1.6-45", "JDK 1.7-55", "JDK 1.8-5" ]
 
 def existingApacheMavenPlugins = [
