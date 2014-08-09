@@ -132,6 +132,7 @@ existingApacheMavenPlugins.each {
 
 existingMavenInstallations.each {
   mavenInst ->
+    def regexMaven = mavenInst.replaceAll('.', '\.').replaceAll('-', '\-').replaceAll(' ', '\ ')
     view {
       name (mavenInst)
       columns {
@@ -145,7 +146,7 @@ existingMavenInstallations.each {
         weather()
       }
       jobs {
-        regex ("^" + mavenInst + "-.*")
+        regex ("^" + regexMaven + "-.*")
       }
     }
 
