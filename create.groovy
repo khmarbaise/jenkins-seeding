@@ -74,10 +74,12 @@ existingApacheMavenPlugins.each {
       wrappers {
         timestamps ()
       }
-      maven {
-          mavenInstallation("Maven 3.0.5")
-          goals("-V -B -U -fae -Prun-its clean verify")
-          localRepository(LocalToWorkspace)
+      steps {
+        maven {
+            mavenInstallation("Maven 3.0.5")
+            goals("-V -B -U -fae -Prun-its clean verify")
+            localRepository(LocalToWorkspace)
+        }
       }
       
     }
