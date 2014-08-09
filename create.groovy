@@ -56,6 +56,8 @@ def existingApacheMavenPlugins = [
 
 def svn_apache_plugin = 'http://svn.apache.org/repos/asf/maven/plugins/trunk'
 
+def defaultJDK = existingJDKInstallations[0]
+
 existingApacheMavenPlugins.each {
   plugin ->
     println " Plugin: " + plugin
@@ -63,7 +65,7 @@ existingApacheMavenPlugins.each {
       name ('DSL-' + plugin)
       disabled(true)
 
-      jdk("JDK-1.7-u40")
+      jdk(defaultJDK)
       scm {
           svn (svn_apache_plugin + '/' + plugin + '/', '.')
       }
@@ -76,7 +78,7 @@ existingApacheMavenPlugins.each {
             println " Maven: '" + installation + "'"
             maven {
                 mavenInstallation(installation)
-                goals("-B -Prun-its clean verify")
+                goals("-V -B -U -fae -Prun-its clean verify")
                 localRepository(LocalToWorkspace)
             }
         }
