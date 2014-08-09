@@ -58,14 +58,29 @@ def svn_apache_plugin = 'http://svn.apache.org/repos/asf/maven/plugins/trunk'
 
 def defaultJDK = existingJDKInstallations[0]
 
-job ( type: Matrix) {
-  name ('Matrix-First')
-  disabled(true)
-  axes {
-    jdk (existingJDKInstallations)
-    label ("JDK", existingJDKInstallations) 
-  }
-  
+existingApacheMavenPlugins.each {
+  plugin ->
+    println " Matrix Plugin: " + plugin
+    job ( type: Matrix) {
+      name ('Matrix-' + plugin)
+      disabled(true)
+      axes {
+        jdk (existingJDKInstallations)
+        label ("JDK", existingJDKInstallations) 
+      }
+      scm {
+          svn (svn_apache_plugin + '/' + plugin + '/', '.')
+      }
+      wrappers {
+        timestamps ()
+      }
+      maven {
+          mavenInstallation("Maven 3.0.5")
+          goals("-V -B -U -fae -Prun-its clean verify")
+          localRepository(LocalToWorkspace)
+      }
+      
+    }
 }
 
 existingApacheMavenPlugins.each {
