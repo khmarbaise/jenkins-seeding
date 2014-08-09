@@ -90,50 +90,13 @@ existingMavenInstallations.each {
     }
 }
 
-
-/*
-existingApacheMavenPlugins.each {
-  plugin ->
-    println " Plugin: " + plugin
-    job (type: Matrix) {
-      name ('DSL-' + plugin)
-      disabled(true)
-
-      jdk(defaultJDK)
-      scm {
-          svn (svn_apache_plugin + '/' + plugin + '/', '.')
-      }
-      triggers {
-          scm('H/15 * * * *')
-      }
-
-      wrappers {
-        timestamps ()
-      }
-      axes {
-        jdk (existingJDKInstallations)
-        label ("JDK", existingJDKInstallations) 
-      }
-      steps {
-        existingMavenInstallations.each {
-          installation ->
-            println " Maven: '" + installation + "'"
-            maven {
-                mavenInstallation(installation)
-                goals("-V -B -U -fae -Prun-its clean verify")
-                localRepository(LocalToWorkspace)
-            }
-        }
-      }
-
-    }
-}
-*/
-
 existingMavenInstallations.each {
   mavenInst ->
-    def mavenJobName = mavenInst.replaceAll(' ', '-')
-    def regexMaven = mavenJobName.replaceAll('\\.', '\\\\.').replaceAll('-', '\\-').replaceAll(' ', '\\ ')
+    def regexMaven = mavenInst
+      .replaceAll(' ', '-')
+      .replaceAll('\\.', '\\\\.')
+      .replaceAll('-', '\\-')
+
     view {
       name (mavenInst)
       columns {
