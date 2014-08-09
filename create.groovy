@@ -66,7 +66,6 @@ existingApacheMavenPlugins.each {
       disabled(true)
       axes {
         jdk (existingJDKInstallations)
-        label ("JDK", existingJDKInstallations) 
       }
       scm {
           svn (svn_apache_plugin + '/' + plugin + '/', '.')
