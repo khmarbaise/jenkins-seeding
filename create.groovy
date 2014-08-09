@@ -146,7 +146,7 @@ existingMavenInstallations.each {
         weather()
       }
       jobs {
-        regex ("^" + regexMaven + "-.*")
+        regex ("^Matrix-" + regexMaven + "-.*")
       }
     }
 
