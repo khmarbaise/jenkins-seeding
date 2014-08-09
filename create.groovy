@@ -63,33 +63,33 @@ existingMavenInstallations.each {
     println " Maven Version:" + mavenInst
     def mavenJobName = mavenInst.replaceAll(' ', '-')
     println "   Job:" + mavenJobName
-}
-
-existingApacheMavenPlugins.each {
-  plugin ->
-    println " Matrix Plugin: " + plugin
-    job ( type: Matrix) {
-      name ('Matrix-' + plugin)
-      disabled(true)
-      axes {
-        jdk (existingJDKInstallations)
-      }
-      scm {
-          svn (svn_apache_plugin + '/' + plugin + '/', '.')
-      }
-      wrappers {
-        timestamps ()
-      }
-      steps {
-        maven {
-            mavenInstallation("Maven 3.0.5")
-            goals("-V -B -U -fae -Prun-its clean verify")
-            localRepository(LocalToWorkspace)
+    existingApacheMavenPlugins.each {
+      plugin ->
+        println " Matrix Plugin: " + plugin + " MavenVersion:" + mavenInst
+        job ( type: Matrix) {
+          name ('Matrix-' + mavenJobName+ '-' + plugin)
+          disabled(true)
+          axes {
+            jdk (existingJDKInstallations)
+          }
+          scm {
+              svn (svn_apache_plugin + '/' + plugin + '/', '.')
+          }
+          wrappers {
+            timestamps ()
+          }
+          steps {
+            maven {
+                mavenInstallation(mavenInst)
+                goals("-V -B -U -fae -Prun-its clean verify")
+                localRepository(LocalToWorkspace)
+            }
+          }
+          
         }
-      }
-      
     }
 }
+
 
 existingApacheMavenPlugins.each {
   plugin ->
