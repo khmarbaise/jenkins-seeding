@@ -92,7 +92,7 @@ existingApacheMavenPlugins.each {
 view {
   name ("First View")
   jobs {
-    regex ('^DSL-.*')
+    regex ("^DSL-.*")
   }
 }
 
