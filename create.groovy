@@ -58,6 +58,13 @@ def svn_apache_plugin = 'http://svn.apache.org/repos/asf/maven/plugins/trunk'
 
 def defaultJDK = existingJDKInstallations[0]
 
+existingMavenInstallations.each {
+  mavenInst ->
+    println " Maven Version:" + mavenInst
+    def mavenJobName = mavenInst.replaceAll(' ', '-')
+    println "   Job:" + mavenJobName
+}
+
 existingApacheMavenPlugins.each {
   plugin ->
     println " Matrix Plugin: " + plugin
