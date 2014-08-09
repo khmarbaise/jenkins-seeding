@@ -91,6 +91,7 @@ existingMavenInstallations.each {
 }
 
 
+/*
 existingApacheMavenPlugins.each {
   plugin ->
     println " Plugin: " + plugin
@@ -127,22 +128,25 @@ existingApacheMavenPlugins.each {
 
     }
 }
+*/
 
+existingMavenInstallations.each {
+  mavenInst ->
+    view {
+      name (mavenInst)
+      columns {
+        buildButton()
+        lastBuildConsole() 
+        lastDuration()
+        lastFailure()
+        lastSuccess()
+        name()
+        status()
+        weather()
+      }
+      jobs {
+        regex ("^" + mavenInst + "-.*")
+      }
+    }
 
-view {
-  name ("First View")
-  columns {
-    buildButton()
-    lastBuildConsole() 
-    lastDuration()
-    lastFailure()
-    lastSuccess()
-    name()
-    status()
-    weather()
-  }
-  jobs {
-    regex ("^DSL-.*")
-  }
 }
-
