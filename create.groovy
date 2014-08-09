@@ -91,6 +91,16 @@ existingApacheMavenPlugins.each {
 
 view {
   name ("First View")
+  columns {
+    buildButton()
+    lastBuildConsole() 
+    lastDuration()
+    lastFailure()
+    lastSuccess()
+    name()
+    status()
+    weather()
+  }
   jobs {
     regex ("^DSL-.*")
   }
