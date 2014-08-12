@@ -21,6 +21,7 @@ def existingApacheMavenPlugins = [
   "maven-ant-plugin",
   "maven-antrun-plugin",
   "maven-assembly-plugin",
+/*
   "maven-changelog-plugin",
   "maven-changes-plugin",
   "maven-checkstyle-plugin",
@@ -59,11 +60,16 @@ def existingApacheMavenPlugins = [
   "maven-toolchains-plugin",
   "maven-verifier-plugin",
   "maven-war-plugin",
+*/
 ]
 
 def svn_apache_plugin = 'http://svn.apache.org/repos/asf/maven/plugins/trunk'
 
 def defaultJDK = existingJDKInstallations[0]
+
+folder {
+  name 'apache-maven-plugins'
+}
 
 existingMavenInstallations.each {
   mavenInst ->
@@ -73,8 +79,9 @@ existingMavenInstallations.each {
     existingApacheMavenPlugins.each {
       plugin ->
         println " Matrix Plugin: " + plugin + " MavenVersion:" + mavenInst
+        jobName = 'Matrix-' + mavenJobName + '-' + plugin
         job ( type: Matrix) {
-          name ('Matrix-' + mavenJobName+ '-' + plugin)
+          name (jobName)
           disabled(true)
           axes {
             jdk (existingJDKInstallations)
@@ -85,6 +92,7 @@ existingMavenInstallations.each {
           wrappers {
             timestamps ()
           }
+
           steps {
             maven {
                 mavenInstallation(mavenInst)
