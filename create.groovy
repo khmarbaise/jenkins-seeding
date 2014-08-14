@@ -14,7 +14,7 @@ def existingMavenInstallations = [
   "Maven 3.2.3" 
 ]
 
-def existingJDKInstallations = [ "JDK 1.5-22", "JDK 1.6-45", "JDK 1.7-55", "JDK 1.8-5" ]
+def existingJDKInstallations = [ "JDK-1.5-u22", "JDK-1.6-u45", "JDK-1.7-u40", "JDK-1.8-u5" ]
 
 def existingApacheMavenPlugins = [
   "maven-acr-plugin",
