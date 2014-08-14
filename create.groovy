@@ -67,6 +67,10 @@ def svn_apache_plugin = 'http://svn.apache.org/repos/asf/maven/plugins/trunk'
 
 def defaultJDK = existingJDKInstallations[0]
 
+folder {
+  name 'apache-maven-plugins'
+}
+
 existingMavenInstallations.each {
   mavenInst ->
     println " Maven Version:" + mavenInst
