@@ -71,11 +71,9 @@ def folderName = "apache-maven-plugins"
 
 folder {
   name folderName
+  description ('<div><img src=\"http://apache.org/images/feather-small.gif\"/><h1>The Apache Software Foundation</h1></div>')
 /*
   configuration {
-    description ('<div>
-    <img src=\"http://apache.org/images/feather-small.gif\"/>
-    <h1>The Apache Software Foundation</h1></div>')
   }
 */
 }
