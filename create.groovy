@@ -67,8 +67,10 @@ def svn_apache_plugin = 'http://svn.apache.org/repos/asf/maven/plugins/trunk'
 
 def defaultJDK = existingJDKInstallations[0]
 
+def folderName = "apache-maven-plugins"
+
 folder {
-  name 'apache-maven-plugins'
+  name folderName
 }
 
 existingMavenInstallations.each {
@@ -81,7 +83,7 @@ existingMavenInstallations.each {
         println " Matrix Plugin: " + plugin + " MavenVersion:" + mavenInst
         jobName = 'Matrix-' + mavenJobName + '-' + plugin
         job ( type: Matrix) {
-          name (jobName)
+          name (folderName + "/" + jobName)
           disabled(true)
           axes {
             jdk (existingJDKInstallations)
@@ -113,7 +115,7 @@ existingMavenInstallations.each {
       .replaceAll('-', '\\-')
 
     view {
-      name (mavenInst)
+      name (folderName + "/" + mavenInst)
       columns {
         buildButton()
         lastBuildConsole() 
