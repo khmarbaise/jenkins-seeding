@@ -14,7 +14,11 @@ def existingMavenInstallations = [
   "Maven 3.2.3" 
 ]
 
+def maven2 = existingMavenInstallations[0]
+
 def existingJDKInstallations = [ "JDK-1.5-u22", "JDK-1.6-u45", "JDK-1.7-u40", "JDK-1.8-u5" ]
+def maven32JDK = existingJDKInstallations[1..3]
+
 
 def existingApacheMavenPlugins = [
   "maven-acr-plugin",
@@ -65,18 +69,16 @@ def existingApacheMavenPlugins = [
 
 def svn_apache_plugin = 'http://svn.apache.org/repos/asf/maven/plugins/trunk'
 
-def defaultJDK = existingJDKInstallations[0]
 
 def folderName = "apache-maven-plugins"
 
 folder {
   name folderName
   displayName ('Apache Maven Plugins')
-  description ('<div><img src=\"http://apache.org/images/feather-small.gif\"/><h1>The Apache Software Foundation</h1></div>')
-/*
-  configuration {
-  }
-*/
+  description ('''<div><img src="http://apache.org/images/feather-small.gif"/>
+<h1>The Apache Software Foundation</h1>
+</div>''')
+
 }
 
 existingMavenInstallations.each {
@@ -91,8 +93,13 @@ existingMavenInstallations.each {
         job ( type: Matrix) {
           name (folderName + "/" + jobName)
           disabled(true)
+          def jdks = existingJDKInstallations
+          if (mavenInst >= "Maven 3.2.1") {
+            println "Greater Maven 3.2"
+            jdks = maven32JDK
+          }
           axes {
-            jdk (existingJDKInstallations)
+            jdk (jdks)
           }
           scm {
               svn (svn_apache_plugin + '/' + plugin + '/', '.')
