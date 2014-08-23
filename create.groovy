@@ -25,7 +25,6 @@ def existingApacheMavenPlugins = [
   "maven-ant-plugin",
   "maven-antrun-plugin",
   "maven-assembly-plugin",
-/*
   "maven-changelog-plugin",
   "maven-changes-plugin",
   "maven-checkstyle-plugin",
@@ -64,7 +63,6 @@ def existingApacheMavenPlugins = [
   "maven-toolchains-plugin",
   "maven-verifier-plugin",
   "maven-war-plugin",
-*/
 ]
 
 def svn_apache_plugin = 'http://svn.apache.org/repos/asf/maven/plugins/trunk'
