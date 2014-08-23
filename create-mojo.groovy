@@ -25,6 +25,8 @@ def existingMojoCodehausPlugins = [
   "appassembler",
   "apt-maven-plugin",
   "aspectj-maven-plugin",
+
+/*
   "axistools-maven-plugin",
   "batik-maven-plugin",
   "build-helper-maven-plugin",
@@ -119,6 +121,8 @@ def existingMojoCodehausPlugins = [
   "xdoclet-maven-plugin",
   "xml-maven-plugin",
   "xmlbeans-maven-plugin",
+
+*/
 ]
 
 def svn_mojo_plugin = 'https://svn.codehaus.org/mojo/trunk/mojo'
