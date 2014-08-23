@@ -4,9 +4,19 @@ import org.tmatesoft.svn.core.*
 import org.tmatesoft.svn.core.io.*
 import java.util.*
 
+def existingMavenInstallations = [ 
+  "Maven 2.2.1", 
+  "Maven 3.0.5", 
+  "Maven 3.1.1", 
+  "Maven 3.2.1", 
+  "Maven 3.2.2", 
+  "Maven 3.2.3" 
+]
 
-def existingMavenInstallations = [ "Maven 2.2.1", "Maven 3.0.5", "Maven 3.1.1", "Maven 3.2.1", "Maven 3.2.2" ]
+def maven2 = existingMavenInstallations[0]
+
 def existingJDKInstallations = [ "JDK-1.5-u22", "JDK-1.6-u45", "JDK-1.7-u40", "JDK-1.8-u5" ]
+def maven32JDK = existingJDKInstallations[1..3]
 
 
 def existingMojoCodehausPlugins = [
@@ -113,32 +123,79 @@ def existingMojoCodehausPlugins = [
 
 def svn_mojo_plugin = 'https://svn.codehaus.org/mojo/trunk/mojo'
 
-existingMojoCodehausPlugins.each {
-  plugin ->
-    println " Plugin: " + plugin
-    job {
-      name ('DSL-' + plugin)
-      disabled(true)
 
-      jdk("JDK-1.7-u40")
-      scm {
-          svn (svn_mojo_plugin + '/' + plugin + '/', '.')
-      }
-      triggers {
-          scm('H/15 * * * *')
-      }
-      steps {
-        existingMavenInstallations.each {
-          installation ->
-          println " Maven: '" + installation + "'"
-          maven {
-              mavenInstallation(installation)
-              goals("-B -Prun-its clean verify")
-              localRepository(LocalToWorkspace)
+def folderName = "mojo-maven-plugins"
+
+folder {
+  name folderName
+  displayName ('Mojo Codehaus Maven Plugins')
+  description ('''<div><img src="http://mojo.codehaus.org/images/codehaus-small.png"/>
+<h1>Mojo Codehaus</h1>
+</div>''')
+
+}
+
+existingMavenInstallations.each {
+  mavenInst ->
+    println " Maven Version:" + mavenInst
+    def mavenJobName = mavenInst.replaceAll(' ', '-')
+    println "   Job:" + mavenJobName
+    existingApacheMavenPlugins.each {
+      plugin ->
+        println " Matrix Plugin: " + plugin + " MavenVersion:" + mavenInst
+        jobName = 'Matrix-' + mavenJobName + '-' + plugin
+        job ( type: Matrix) {
+          name (folderName + "/" + jobName)
+          disabled(false)
+          def jdks = existingJDKInstallations
+          if (mavenInst >= "Maven 3.2.1") {
+            println "Greater Maven 3.2"
+            jdks = maven32JDK
           }
-        }
-      }
+          axes {
+            jdk (jdks)
+          }
+          scm {
+              svn (svn_mojo_plugin + '/' + plugin + '/', '.')
+          }
+          wrappers {
+            timestamps ()
+          }
 
+          steps {
+            maven {
+                mavenInstallation(mavenInst)
+                goals("-V -B -U -fae -Prun-its clean verify")
+                localRepository(LocalToWorkspace)
+            }
+          }
+          
+        }
     }
 }
 
+existingMavenInstallations.each {
+  mavenInst ->
+    def regexMaven = mavenInst
+      .replaceAll(' ', '-')
+      .replaceAll('\\.', '\\\\.')
+      .replaceAll('-', '\\-')
+
+    view {
+      name (folderName + "/" + mavenInst)
+      columns {
+        buildButton()
+        lastBuildConsole() 
+        lastDuration()
+        lastFailure()
+        lastSuccess()
+        name()
+        status()
+        weather()
+      }
+      jobs {
+        regex ("^Matrix-" + regexMaven + "-.*")
+      }
+    }
+
+}
