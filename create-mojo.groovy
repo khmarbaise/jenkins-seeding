@@ -144,7 +144,7 @@ existingMavenInstallations.each {
     println " Maven Version:" + mavenInst
     def mavenJobName = mavenInst.replaceAll(' ', '-')
     println "   Job:" + mavenJobName
-    existingApacheMavenPlugins.each {
+    existingMojoCodehausPlugins.each {
       plugin ->
         println " Matrix Plugin: " + plugin + " MavenVersion:" + mavenInst
         jobName = 'Matrix-' + mavenJobName + '-' + plugin
