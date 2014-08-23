@@ -90,7 +90,7 @@ existingMavenInstallations.each {
         jobName = 'Matrix-' + mavenJobName + '-' + plugin
         job ( type: Matrix) {
           name (folderName + "/" + jobName)
-          disabled(true)
+          disabled(false)
           def jdks = existingJDKInstallations
           if (mavenInst >= "Maven 3.2.1") {
             println "Greater Maven 3.2"
