@@ -16,7 +16,7 @@ def existingMavenInstallations = [
 
 def maven2 = existingMavenInstallations[0]
 
-def existingJDKInstallations = [ "JDK-1.5-u22", "JDK-1.6-u45", "JDK-1.7-u40", "JDK-1.8-u5" ]
+def existingJDKInstallations = [ "JDK-1.5-u22", "JDK-1.6-u45", "JDK-1.7-u40", "JDK-1.8-u20" ]
 def maven32JDK = existingJDKInstallations[1..3]
 
 
