@@ -109,7 +109,7 @@ existingMavenInstallations.each {
           steps {
             maven {
                 mavenInstallation(mavenInst)
-                goals("-V -B -U -fae -Prun-its clean verify")
+                goals("-V -B -U -fae -Prun-its clean verify -Drat.ignoreErrors=true")
                 localRepository(LocalToWorkspace)
             }
           }
