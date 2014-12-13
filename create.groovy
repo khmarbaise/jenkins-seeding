@@ -65,7 +65,7 @@ def existingApacheMavenPlugins = [
   "maven-war-plugin",
 ]
 
-def svn_apache_plugin = 'http://svn.apache.org/repos/asf/maven/plugins/trunk'
+def svn_apache_plugin = 'http://svn.eu.apache.org/repos/asf/maven/plugins/trunk'
 
 
 def folderName = "apache-maven-plugins"
